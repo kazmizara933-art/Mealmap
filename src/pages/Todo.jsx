@@ -59,7 +59,7 @@ function Todo() {
 
   return (
     
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-4 md:p-6">
 
       {/* Header */}
       <div className="rounded-2xl overflow-hidden shadow border border-emerald-100 bg-white">
@@ -94,14 +94,14 @@ function Todo() {
         </div>
 
         {/* Add */}
-        <form onSubmit={addItem} className="p-4 flex items-center gap-2">
+        <form onSubmit={addItem} className="p-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           <input
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             placeholder="Add a nutrition task (e.g., 30g protein lunch)"
             className="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
           />
-          <button type="submit" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow">
+          <button type="submit" className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow w-full sm:w-auto">
             <Plus className="w-5 h-5" />
             Add
           </button>
@@ -110,7 +110,7 @@ function Todo() {
         {/* List */}
         <ul className="divide-y divide-gray-100">
           {visible.map(item => (
-            <li key={item.id} className="p-4 flex items-center gap-3 hover:bg-gray-50 transition-colors">
+            <li key={item.id} className="p-4 flex flex-wrap items-start sm:items-center gap-3 hover:bg-gray-50 transition-colors">
               <button
                 onClick={() => toggle(item.id)}
                 className={`flex items-center justify-center w-8 h-8 rounded-full border-2 shrink-0 ${item.done ? 'bg-emerald-100 border-emerald-300' : 'border-gray-300'}`}
@@ -119,7 +119,7 @@ function Todo() {
               >
                 {item.done ? <Check className="w-4 h-4 text-emerald-700" /> : <Clock className="w-4 h-4 text-gray-400" />}
               </button>
-              <span>{iconFor(item.type)}</span>
+              <span className="shrink-0">{iconFor(item.type)}</span>
               <div className="flex-1 min-w-0">
                 <p className={`font-medium ${item.done ? 'text-gray-400 line-through' : 'text-gray-800'}`}>{item.text}</p>
                 <div className="mt-1 flex items-center gap-2">
@@ -127,7 +127,7 @@ function Todo() {
                   {item.type === 'meal' && <span className="text-xs text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">Protein focus</span>}
                 </div>
               </div>
-              <button onClick={() => remove(item.id)} className="text-xs text-gray-400 hover:text-red-500">Remove</button>
+              <button onClick={() => remove(item.id)} className="text-xs text-gray-400 hover:text-red-500 sm:ml-auto">Remove</button>
             </li>
           ))}
           {visible.length === 0 && (

@@ -21,7 +21,7 @@ function Progress() {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#10b981]">Progress</h1>
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-gray-800">Progress</h1>
           <p className="text-sm text-gray-500 mt-1">Your body metrics, calories, sleep and hydration</p>
         </div>
         <div className="flex items-center gap-2">

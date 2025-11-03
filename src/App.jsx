@@ -29,6 +29,8 @@ function App() {
           <Route path="/mealplan" element={<MealPlan />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/profile" element={<Profile />} />
+          {/* Catch-all to prevent client-side 404s */}
+          <Route path="*" element={<Landing />} />
     
         </Route>
       </Routes>

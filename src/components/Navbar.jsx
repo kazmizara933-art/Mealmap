@@ -115,7 +115,7 @@ function Navbar() {
                 </NavLink>
               </li>
               <li>
-                <NavLink
+                {/* <NavLink
                   to="/profile"
                   className={({ isActive }) =>
                     `px-3 py-1.5 rounded-md font-medium transition-colors hover:bg-emerald-50 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 ${
@@ -124,7 +124,7 @@ function Navbar() {
                   }
                 >
                   profile
-                </NavLink>
+                </NavLink> */}
               </li>
             </>
           ) : null}

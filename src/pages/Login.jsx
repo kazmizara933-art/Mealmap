@@ -18,10 +18,10 @@ function Login() {
       <div className="absolute inset-0 bg-black/30 pointer-events-none z-10" />
 
       {/* Form Container */}
-      <div className="relative z-20 bg-white rounded-xl shadow-xl p-10 w-full max-w-lg   transform transition-transform duration-300 hover:scale-95 focus-within:scale-95 ">
+      <div className="relative z-20 bg-white rounded-xl shadow-xl p-6 sm:p-10 w-full max-w-lg   transform transition-transform duration-300 hover:scale-95 focus-within:scale-95 ">
         {/* Header */}
         <div className="flex flex-col items-center mb-8">
-          <img src={nutrilogo} alt="Nutri Logo" className="w-52 h-auto mb-4" />
+          <img src={nutrilogo} alt="Nutri Logo" className="w-40 sm:w-52 h-auto mb-4" />
           <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">Welcome Back</h1>
           <p className="text-gray-600 text-center text-base">
             Sign in to your account and start tracking your nutrition

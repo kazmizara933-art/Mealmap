@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { MessageCircle, Bell, User, Settings, LogIn, UserPlus } from 'lucide-react';
+import { MessageCircle, Bell, User, Settings, LogIn, UserPlus, Menu, X } from 'lucide-react';
 import nutrilogo from '../assets/nutrilogo.png';
 import userAvatar from '../assets/nutrilogo.png';
 
@@ -11,6 +11,7 @@ function Navbar() {
   const isAuthPage = path === '/login' || path === '/register';
   const isAuthed = !isLanding && !isAuthPage; // naive route-based auth state
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -19,7 +20,10 @@ function Navbar() {
       if (!menuRef.current.contains(e.target)) setMenuOpen(false);
     };
     const onEsc = (e) => {
-      if (e.key === 'Escape') setMenuOpen(false);
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        setMobileOpen(false);
+      }
     };
     document.addEventListener('mousedown', onDocClick);
     document.addEventListener('keydown', onEsc);
@@ -28,6 +32,10 @@ function Navbar() {
       document.removeEventListener('keydown', onEsc);
     };
   }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
 
   return (
     <nav className={`sticky top-0 z-50 ${isLanding ? 'bg-white/80 backdrop-blur border-b border-emerald-50' : 'bg-white border-b'} text-black`}>
@@ -43,7 +51,7 @@ function Navbar() {
         </div>
 
         {/* Nav Links (center) */}
-        <ul className="flex items-center justify-center gap-5 md:gap-1">
+        <ul className="hidden md:flex items-center justify-center gap-5 md:gap-1">
           {isAuthed ? (
             <>
               <li>
@@ -124,7 +132,7 @@ function Navbar() {
 
         {/* Right actions (auth only) */}
         {isAuthed ? (
-          <div className="flex items-center justify-end gap-5">
+          <div className="hidden md:flex items-center justify-end gap-5">
             <button
               className="relative p-2 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               aria-label="Open messages"
@@ -176,7 +184,7 @@ function Navbar() {
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-end gap-2">
+          <div className="hidden md:flex items-center justify-end gap-2">
             <NavLink
               to="/login"
               className={({ isActive }) =>
@@ -210,8 +218,85 @@ function Navbar() {
             
           </div>
         )}
+        <button
+          className="justify-self-end md:hidden p-2 rounded-md border border-gray-200 hover:bg-gray-50"
+          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((v) => !v)}
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
- 
+
+      {mobileOpen && (
+        <div className="md:hidden border-t border-gray-200 bg-white">
+          {isAuthed ? (
+            <ul className="px-4 py-3 space-y-1">
+              <li>
+                <NavLink to="/home" onClick={() => setMobileOpen(false)} className={({ isActive }) => `${isActive ? 'text-emerald-700' : 'text-gray-700'} block px-2 py-2 rounded hover:bg-emerald-50`}>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/todo" onClick={() => setMobileOpen(false)} className={({ isActive }) => `${isActive ? 'text-emerald-700' : 'text-gray-700'} block px-2 py-2 rounded hover:bg-emerald-50`}>
+                  To-Do
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/progress" onClick={() => setMobileOpen(false)} className={({ isActive }) => `${isActive ? 'text-emerald-700' : 'text-gray-700'} block px-2 py-2 rounded hover:bg-emerald-50`}>
+                  Progress
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/mealplan" onClick={() => setMobileOpen(false)} className={({ isActive }) => `${isActive ? 'text-emerald-700' : 'text-gray-700'} block px-2 py-2 rounded hover:bg-emerald-50`}>
+                  Meal Plan
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/calendar" onClick={() => setMobileOpen(false)} className={({ isActive }) => `${isActive ? 'text-emerald-700' : 'text-gray-700'} block px-2 py-2 rounded hover:bg-emerald-50`}>
+                  Calendar
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile" onClick={() => setMobileOpen(false)} className={({ isActive }) => `${isActive ? 'text-emerald-700' : 'text-gray-700'} block px-2 py-2 rounded hover:bg-emerald-50`}>
+                  Profile
+                </NavLink>
+              </li>
+            </ul>
+          ) : (
+            <div className="px-4 py-3 space-y-2">
+              <NavLink
+                to="/login"
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-md text-sm font-medium border transition-all ${
+                    isActive
+                      ? 'border-emerald-600 text-emerald-700 bg-emerald-50'
+                      : 'border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400'
+                  }`
+                }
+              >
+                <LogIn className="w-4 h-4" />
+                <span>Login</span>
+              </NavLink>
+              <NavLink
+                to="/register"
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-semibold shadow-sm ${
+                    isActive
+                      ? 'bg-emerald-700 text-white'
+                      : 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700 hover:shadow-lg'
+                  }`
+                }
+              >
+                <UserPlus className="w-4 h-4" />
+                <span>Create account</span>
+              </NavLink>
+            </div>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

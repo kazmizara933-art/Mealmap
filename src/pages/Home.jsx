@@ -145,7 +145,7 @@ function TaskProgressList() {
 function Home() {
   return (
     <>
-      <div className="p-6">
+      <div className="p-4 md:p-6">
 
 
 

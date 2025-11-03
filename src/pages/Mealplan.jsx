@@ -79,7 +79,7 @@ function MealCard({ tonePill, data }) {
       <img
         src={data.img}
         alt={data.title}
-        className="h-14 w-14 rounded-lg object-cover border border-gray-200 shadow-sm"
+        className="h-12 w-12 sm:h-14 sm:w-14 rounded-lg object-cover border border-gray-200 shadow-sm"
       />
       <div className="min-w-0">
         <p className="truncate font-medium text-gray-800">{data.title}</p>
@@ -116,7 +116,7 @@ function MealPlan() {
       </header>
 
       {/* Search bar */}
-      <div className="mt-6 flex items-center gap-2">
+      <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
           <input
@@ -125,7 +125,7 @@ function MealPlan() {
             className="w-full pl-9 pr-3 py-2 rounded-lg border border-gray-200 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
           />
         </div>
-        <button className="rounded-lg bg-emerald-500 text-white px-4 py-2 text-sm hover:bg-emerald-600 shadow-sm">
+        <button className="rounded-lg bg-emerald-500 text-white px-4 py-2 text-sm hover:bg-emerald-600 shadow-sm w-full sm:w-auto">
           + Add Meal
         </button>
       </div>
@@ -166,7 +166,7 @@ function MealPlan() {
       {/* Meal Grid */}
       <section className="mt-8 rounded-2xl border border-gray-200 bg-white shadow-sm overflow-auto">
         {/* Sticky column headers */}
-        <div className="sticky top-0 z-10 grid grid-cols-[140px_repeat(3,1fr)] items-center border-b bg-white px-4 py-3 text-sm font-semibold text-gray-600 shadow-sm">
+        <div className="sticky top-0 z-10 grid grid-cols-[110px_repeat(3,minmax(160px,1fr))] sm:grid-cols-[120px_repeat(3,1fr)] md:grid-cols-[140px_repeat(3,1fr)] items-center border-b bg-white px-4 py-3 text-sm font-semibold text-gray-600 shadow-sm min-w-[640px] sm:min-w-[720px] md:min-w-[900px]">
           <div>Day</div>
           {meals.map((m) => (
             <div key={m.key} className="flex items-center gap-2">
@@ -181,7 +181,7 @@ function MealPlan() {
           {days.map((day, dIdx) => (
             <div
               key={day}
-              className={`grid grid-cols-[140px_repeat(3,1fr)] items-stretch px-4 ${dIdx % 2 === 0 ? "bg-white" : "bg-gray-50/60"} border-b last:border-b-0`}
+              className={`grid grid-cols-[110px_repeat(3,minmax(160px,1fr))] sm:grid-cols-[120px_repeat(3,1fr)] md:grid-cols-[140px_repeat(3,1fr)] items-stretch px-4 ${dIdx % 2 === 0 ? "bg-white" : "bg-gray-50/60"} border-b last:border-b-0 min-w-[640px] sm:min-w-[720px] md:min-w-[900px]`}
             >
               {/* Day Cell */}
               <div className="py-4 pr-4 flex items-center">

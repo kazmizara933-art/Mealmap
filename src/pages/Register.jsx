@@ -53,7 +53,7 @@ function Register() {
         {/* Form */}
         <form className="flex flex-col gap-4">
           {/* Row 1: Full Name + Email */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <input
               type="text"
               placeholder="Full Name"
@@ -67,7 +67,7 @@ function Register() {
           </div>
 
           {/* Row 2: Password + Confirm Password */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <input
               type="password"
               placeholder="Password"

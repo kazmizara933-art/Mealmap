@@ -8,8 +8,8 @@ function Layout() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className={isLanding ? "p-0" : "p-4"}>
-        <Outlet />   {/* ✅ yahan nested pages render honge */}
+      <main className={isLanding ? "p-0" : "md:p-4"}>
+        <Outlet />   
       </main>
     </div>
   );
